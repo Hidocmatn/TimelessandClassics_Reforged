@@ -1,0 +1,31 @@
+{
+  "model": "tac:gun/glock_17_geo",
+  "textures": [
+    {
+      "id": "default",
+      "location": "tac:gun/uv/glock_17"
+    }
+  ],
+  "hud": "tac:gun/hud/ak47",
+  "slot": "tac:gun/slot/glock_17",
+  "animation": "tac:glock_17",
+  "transform": {
+    "scale": {
+      "thirdperson": [
+        0.375,
+        0.375,
+        0.375
+      ],
+      "ground": [
+        0.375,
+        0.375,
+        0.375
+      ],
+      "fixed": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    }
+  }
+}

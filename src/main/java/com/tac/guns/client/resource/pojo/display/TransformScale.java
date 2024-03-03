@@ -6,9 +6,6 @@ import com.mojang.math.Vector3f;
 import javax.annotation.Nullable;
 
 public class TransformScale {
-    @SerializedName("firstperson")
-    @Nullable
-    private Vector3f firstPerson;
     @SerializedName("thirdperson")
     @Nullable
     private Vector3f thirdPerson;
@@ -18,4 +15,19 @@ public class TransformScale {
     @SerializedName("fixed")
     @Nullable
     private Vector3f fixed;
+
+    @Nullable
+    public Vector3f getThirdPerson() {
+        return thirdPerson;
+    }
+
+    @Nullable
+    public Vector3f getGround() {
+        return ground;
+    }
+
+    @Nullable
+    public Vector3f getFixed() {
+        return fixed;
+    }
 }

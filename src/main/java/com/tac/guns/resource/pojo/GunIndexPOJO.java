@@ -1,13 +1,16 @@
-package com.tac.guns.client.resource.pojo;
+package com.tac.guns.resource.pojo;
 
 import com.google.gson.annotations.SerializedName;
 import net.minecraft.resources.ResourceLocation;
 
-public class ClientGunIndexPOJO {
+import javax.annotation.Nullable;
+
+public class GunIndexPOJO {
     @SerializedName("name")
     private String name;
 
     @SerializedName("tooltip")
+    @Nullable
     private String tooltip;
 
     @SerializedName("display")
@@ -20,6 +23,7 @@ public class ClientGunIndexPOJO {
         return name;
     }
 
+    @Nullable
     public String getTooltip() {
         return tooltip;
     }

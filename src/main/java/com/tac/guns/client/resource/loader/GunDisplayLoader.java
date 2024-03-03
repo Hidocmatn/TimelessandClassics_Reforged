@@ -1,8 +1,8 @@
 package com.tac.guns.client.resource.loader;
 
 import com.tac.guns.GunMod;
-import com.tac.guns.client.resource.ClientGunLoader;
 import com.tac.guns.client.resource.ClientAssetManager;
+import com.tac.guns.client.resource.ClientGunPackLoader;
 import com.tac.guns.client.resource.pojo.display.GunDisplay;
 import com.tac.guns.util.TacPathVisitor;
 import net.minecraft.resources.ResourceLocation;
@@ -30,15 +30,14 @@ public final class GunDisplayLoader {
         if (matcher.find()) {
             String namespace = matcher.group(1);
             String path = matcher.group(2);
-            String filePath = String.format("%s/guns/display/%s.json", namespace, path);
-            ZipEntry entry = zipFile.getEntry(filePath);
+            ZipEntry entry = zipFile.getEntry(zipPath);
             if (entry == null) {
-                GunMod.LOGGER.warn(MARKER, "{} file don't exist", filePath);
+                GunMod.LOGGER.warn(MARKER, "{} file don't exist", zipPath);
                 return false;
             }
             try (InputStream stream = zipFile.getInputStream(entry)) {
                 ResourceLocation registryName = new ResourceLocation(namespace, path);
-                GunDisplay display = ClientGunLoader.GSON.fromJson(new InputStreamReader(stream, StandardCharsets.UTF_8), GunDisplay.class);
+                GunDisplay display = ClientGunPackLoader.GSON.fromJson(new InputStreamReader(stream, StandardCharsets.UTF_8), GunDisplay.class);
                 ClientAssetManager.INSTANCE.putGunDisplay(registryName, display);
                 return true;
             }
@@ -51,7 +50,7 @@ public final class GunDisplayLoader {
         if (Files.isDirectory(displayPath)) {
             TacPathVisitor visitor = new TacPathVisitor(displayPath.toFile(), root.getName(), ".json", (id, file) -> {
                 try (InputStream stream = Files.newInputStream(file)) {
-                    GunDisplay display = ClientGunLoader.GSON.fromJson(new InputStreamReader(stream, StandardCharsets.UTF_8), GunDisplay.class);
+                    GunDisplay display = ClientGunPackLoader.GSON.fromJson(new InputStreamReader(stream, StandardCharsets.UTF_8), GunDisplay.class);
                     ClientAssetManager.INSTANCE.putGunDisplay(id, display);
                 } catch (IOException exception) {
                     GunMod.LOGGER.warn(MARKER, "Failed to read display file: {}", file);

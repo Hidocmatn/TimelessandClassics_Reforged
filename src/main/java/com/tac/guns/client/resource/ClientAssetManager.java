@@ -3,9 +3,9 @@ package com.tac.guns.client.resource;
 import com.google.common.collect.Maps;
 import com.mojang.blaze3d.audio.SoundBuffer;
 import com.tac.guns.client.animation.gltf.AnimationStructure;
-import com.tac.guns.client.resource.pojo.data.GunData;
 import com.tac.guns.client.resource.pojo.display.GunDisplay;
 import com.tac.guns.client.resource.pojo.model.BedrockModelPOJO;
+import com.tac.guns.resource.pojo.data.GunData;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.Map;
@@ -21,10 +21,6 @@ public enum ClientAssetManager {
      */
     private final Map<ResourceLocation, GunDisplay> gunDisplays = Maps.newHashMap();
     /**
-     * 储存 data 数据
-     */
-    private final Map<ResourceLocation, GunData> gunData = Maps.newHashMap();
-    /**
      * 储存动画
      */
     private final Map<ResourceLocation, AnimationStructure> animations = Maps.newHashMap();
@@ -36,13 +32,13 @@ public enum ClientAssetManager {
      * 储存声音
      */
     private final Map<ResourceLocation, SoundBuffer> soundBuffers = Maps.newHashMap();
+    /**
+     * 存储语言
+     */
+    private final Map<String, Map<String, String>> languages = Maps.newHashMap();
 
     public void putGunDisplay(ResourceLocation registryName, GunDisplay display) {
         gunDisplays.put(registryName, display);
-    }
-
-    public void putGunData(ResourceLocation registryName, GunData data) {
-        gunData.put(registryName, data);
     }
 
     public void putAnimation(ResourceLocation registryName, AnimationStructure animation) {
@@ -57,12 +53,12 @@ public enum ClientAssetManager {
         soundBuffers.put(registryName, soundBuffer);
     }
 
-    public GunDisplay getGunDisplay(ResourceLocation registryName) {
-        return gunDisplays.get(registryName);
+    public void putLanguage(String region, Map<String, String> lang) {
+        languages.put(region, lang);
     }
 
-    public GunData getGunData(ResourceLocation registryName) {
-        return gunData.get(registryName);
+    public GunDisplay getGunDisplay(ResourceLocation registryName) {
+        return gunDisplays.get(registryName);
     }
 
     public AnimationStructure getAnimations(ResourceLocation registryName) {
@@ -75,6 +71,10 @@ public enum ClientAssetManager {
 
     public SoundBuffer getSoundBuffers(ResourceLocation registryName) {
         return soundBuffers.get(registryName);
+    }
+
+    public Map<String, String> getLanguages(String region) {
+        return languages.get(region);
     }
 
     /**
